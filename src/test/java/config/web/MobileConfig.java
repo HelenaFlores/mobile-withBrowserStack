@@ -11,10 +11,6 @@ import org.aeonbits.owner.Config;
 
     public interface MobileConfig extends Config {
 
-    @Key("baseUrl")
-    @DefaultValue("https://hub.browserstack.com/wd/hub")
-    String getBaseUrl();
-
     @Key("remoteUrl")
     @DefaultValue("https://hub.browserstack.com/wd/hub")
     String getRemoteUrl();
