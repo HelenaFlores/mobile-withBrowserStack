@@ -1,17 +1,29 @@
 package helpers;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 
+import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class Attach {
     @Attachment(value = "{attachName}", type = "image/png")
     public static byte[] screenshotAs(String attachName) {
-        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+        try {
+            File screenshot = Selenide.screenshot(OutputType.FILE);
+            if (screenshot == null) {
+                System.out.println("Screenshot file is null");
+                return new byte[0];
+            }
+            return Files.readAllBytes(screenshot.toPath());
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+            return new byte[0];
+        }
     }
 
     @Attachment(value = "Page source", type = "text/plain")
