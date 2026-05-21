@@ -15,14 +15,14 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TestBase {
     @BeforeAll
-    static void beforeAll() {
+    static void setupEnvironment() {
         Configuration.browser = BrowserstackDriver.class.getName();
         Configuration.browserSize = null;
         Configuration.timeout = 30000;
     }
 
     @BeforeEach
-    void beforeEach() {
+    void addListenerAndOpen() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         open();
     }
@@ -38,22 +38,4 @@ public class TestBase {
 
         Attach.addVideo(sessionId);
     }
-
-    /* in beforeAll
-            switch (config.getDeviceHost()) {
-            case BROWSERSTACK -> {
-                Configuration.browser = BrowserstackDriver.class.getName();
-                Configuration.browserSize = null;
-                Configuration.timeout = 30000;
-            }
-            case REAL -> {
-                // Пока не реализовано — бросаем исключение
-                throw new UnsupportedOperationException("REAL device not implemented yet");
-            }
-            case EMULATION -> {
-                // Пока не реализовано — бросаем исключение
-                throw new UnsupportedOperationException("EMULATION not implemented yet");
-            }
-        }
-     */
 }

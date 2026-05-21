@@ -1,6 +1,5 @@
-package config.web;
+package config;
 
-import config.Host;
 import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)

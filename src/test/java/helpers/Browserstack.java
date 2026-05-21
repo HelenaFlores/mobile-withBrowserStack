@@ -1,6 +1,6 @@
 package helpers;
 
-import config.web.MobileConfig;
+import config.MobileConfig;
 import org.aeonbits.owner.ConfigFactory;
 
 import static io.restassured.RestAssured.given;
